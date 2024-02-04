@@ -25,6 +25,12 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+.loader {
+  display: inline-block;
+  transform: translateZ(1px);
+}
+
+
 
 @layer utilities {
   .text-balance {

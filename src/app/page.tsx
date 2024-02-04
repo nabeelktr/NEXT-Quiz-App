@@ -8,7 +8,7 @@ export default function Home() {
           className="cursor-pointer group border border-transparent px-5 py-4 transition-colors "
           rel="noopener noreferrer"
         >
-          <h2 className={`rounded-lg mb-3 text-2xl font-semibold hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 px-3 py-3`}>
+          <h2 className={`cursor-pointer rounded-lg mb-3 text-2xl font-semibold hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 px-3 py-3`}>
             Start Quiz{" "}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
