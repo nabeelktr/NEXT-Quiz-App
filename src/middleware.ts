@@ -6,6 +6,10 @@ export default function middleware(request : NextRequest){
 
   const token = request.cookies.get('token')?.value || ''
 
+  if(path=== '/instructor' && token){
+    return NextResponse.redirect(new URL('/questions', request.nextUrl))
+  }
+
   if(isPrivatePath && !token) {
     return NextResponse.redirect(new URL('/', request.nextUrl))
   }   

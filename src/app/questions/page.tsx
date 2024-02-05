@@ -8,14 +8,12 @@ import AddQuestion from "../component/AddQuestion";
 export default function Questions() {
   const [list, setList] = useState([
     {
+      _id : '',
       question: "",
       answerOptions: [{ answer: "", isCorrect: false }],
     },
   ]);
-  const [form, setForm] = useState({
-    question: "",
-    answerOptions: [{ answer: "", isCorrect: false }],
-  });
+
 
   const [modal, setModal] = useState(false)
 
@@ -31,13 +29,13 @@ export default function Questions() {
     router.push("/instructor");
   };
 
-  const deleteQ = async (id: any) => {
-    let deleted = list.splice(id, 1);
+  const deleteQ = async (id: any, i : any) => {
+    let deleted = list.splice(i, 1);
     let filtered = list.filter((list) => {
       return list !== deleted[0];
     });
     setList(filtered);
-    await axios.delete(`/api/setquestion/${id}`);
+    await axios.delete(`/api/question/${id}`);
   };
 
   const addQuestion = () => {
@@ -76,7 +74,7 @@ export default function Questions() {
                   <span
                     className="svg-icon svg-icon-primary svg-icon-2x "
                     title="Delete"
-                    onClick={() => deleteQ(i)}
+                    onClick={() => deleteQ(item._id, i)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
