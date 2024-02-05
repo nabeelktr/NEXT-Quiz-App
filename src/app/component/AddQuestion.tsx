@@ -4,7 +4,6 @@ import React, { Fragment, useRef, useState } from "react";
 import axios from "axios";
 import { Dialog, Transition } from "@headlessui/react";
 
-
 const AddQuestion = ({
   modal,
   setModal,
@@ -13,9 +12,7 @@ const AddQuestion = ({
 
   setModal: Function;
 }) => {
-
-
-  const [option,setOption] = useState(0);
+  const [option, setOption] = useState(0);
   const cancelButtonRef = useRef(null);
 
   const [creds, setcreds] = useState({
@@ -39,12 +36,11 @@ const AddQuestion = ({
         !creds.answerOptions[3].answer.trim().length
       ) {
         alert("fill all fields");
-      }
-      else {
-        const set = new Set(creds.answerOptions.map(option => option.answer))
-        if(set.size < 4){
-          alert('avoid duplicate answers')
-        }else{
+      } else {
+        const set = new Set(creds.answerOptions.map((option) => option.answer));
+        if (set.size < 4) {
+          alert("avoid duplicate answers");
+        } else {
           creds.answerOptions[option].isCorrect = true;
           await axios.post("/api/question", creds);
           setModal(false);
@@ -115,29 +111,28 @@ const AddQuestion = ({
                               />
                             </div>
                             <div className="grid gap-4 mb-4 sm:grid-cols-2">
-                              
-                                <div>
-                                  <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                    1. Option
-                                  </label>
-                                  <input
-                                    type="text"
-                                    value={creds.answerOptions[0].answer}
-                                    onChange={(e) =>
-                                      setcreds({
-                                        ...creds,
-                                        answerOptions: [
-                                          {
-                                            ...creds.answerOptions[0],
-                                            answer: e.target.value,
-                                          },
-                                          ...creds.answerOptions.slice(1),
-                                        ],
-                                      })
-                                    }
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 
+                              <div>
+                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                  1. Option
+                                </label>
+                                <input
+                                  type="text"
+                                  value={creds.answerOptions[0].answer}
+                                  onChange={(e) =>
+                                    setcreds({
+                                      ...creds,
+                                      answerOptions: [
+                                        {
+                                          ...creds.answerOptions[0],
+                                          answer: e.target.value,
+                                        },
+                                        ...creds.answerOptions.slice(1),
+                                      ],
+                                    })
+                                  }
+                                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 
                                 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                  />
+                                />
                               </div>
 
                               <div>
@@ -210,32 +205,83 @@ const AddQuestion = ({
                               </div>
                             </div>
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                                  Select Correct Option
-                                </label>
+                              Select Correct Option
+                            </label>
                             <div className="grid  place-items-center">
-    <div className="grid w-[40rem] grid-cols-4 gap-2 rounded-xl bg-gray-200 p-1">
-                
-        <div onClick={() => setOption(0)}>
-            <input type="radio" name="option" id="1" value="1" className="peer hidden" checked={option === 0 ? true : false} readOnly/>
-            <label htmlFor="1" className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">1</label>
-        </div>
+                              <div className="grid w-[40rem] grid-cols-4 gap-2 rounded-xl bg-gray-200 p-1">
+                                <div onClick={() => setOption(0)}>
+                                  <input
+                                    type="radio"
+                                    name="option"
+                                    id="1"
+                                    value="1"
+                                    className="peer hidden"
+                                    checked={option === 0 ? true : false}
+                                    readOnly
+                                  />
+                                  <label
+                                    htmlFor="1"
+                                    className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
+                                  >
+                                    1
+                                  </label>
+                                </div>
 
-        <div onClick={() => setOption(1)}>
-            <input type="radio" name="option" id="2" value="2" className="peer hidden" checked={option === 1 ? true : false} readOnly/>
-            <label htmlFor="2" className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">2</label>
-        </div>
+                                <div onClick={() => setOption(1)}>
+                                  <input
+                                    type="radio"
+                                    name="option"
+                                    id="2"
+                                    value="2"
+                                    className="peer hidden"
+                                    checked={option === 1 ? true : false}
+                                    readOnly
+                                  />
+                                  <label
+                                    htmlFor="2"
+                                    className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
+                                  >
+                                    2
+                                  </label>
+                                </div>
 
-        <div onClick={() => setOption(2)}>
-            <input type="radio" name="option" id="3" value="3" className="peer hidden" checked={option === 2 ? true : false} readOnly/>
-            <label htmlFor="3" className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">3</label>
-        </div>
+                                <div onClick={() => setOption(2)}>
+                                  <input
+                                    type="radio"
+                                    name="option"
+                                    id="3"
+                                    value="3"
+                                    className="peer hidden"
+                                    checked={option === 2 ? true : false}
+                                    readOnly
+                                  />
+                                  <label
+                                    htmlFor="3"
+                                    className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
+                                  >
+                                    3
+                                  </label>
+                                </div>
 
-        <div onClick={() => setOption(3)}>
-            <input type="radio" name="option" id="4" value="3" className="peer hidden" checked={option === 3 ? true : false} readOnly/>
-            <label htmlFor="4" className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white">4</label>
-        </div>
-    </div>
-</div>
+                                <div onClick={() => setOption(3)}>
+                                  <input
+                                    type="radio"
+                                    name="option"
+                                    id="4"
+                                    value="3"
+                                    className="peer hidden"
+                                    checked={option === 3 ? true : false}
+                                    readOnly
+                                  />
+                                  <label
+                                    htmlFor="4"
+                                    className="block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-blue-500 peer-checked:font-bold peer-checked:text-white"
+                                  >
+                                    4
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
                             <div className="flex items-center space-x-4">
                               <button
                                 type="submit"

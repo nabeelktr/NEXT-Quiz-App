@@ -15,11 +15,11 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formdata.username.trim().length && formdata.password.trim().length) {
-      const {data} = await axios.post("/api/login", formdata);
+      const { data } = await axios.post("/api/login", formdata);
 
-      if(data.success){
-        router.push('/questions')
-      }else{
+      if (data.success) {
+        router.push("/questions");
+      } else {
         setInvalid(true);
       }
     } else {
@@ -27,7 +27,6 @@ export default function Login() {
     }
   };
 
-  
   return (
     <>
       <div className="pt-10 relative flex flex-col text-gray-700 bg-transparent shadow-none rounded-xl bg-clip-border">

@@ -8,14 +8,13 @@ import AddQuestion from "../component/AddQuestion";
 export default function Questions() {
   const [list, setList] = useState([
     {
-      _id : '',
+      _id: "",
       question: "",
       answerOptions: [{ answer: "", isCorrect: false }],
     },
   ]);
 
-
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
 
   const router = useRouter();
 
@@ -29,7 +28,7 @@ export default function Questions() {
     router.push("/instructor");
   };
 
-  const deleteQ = async (id: any, i : any) => {
+  const deleteQ = async (id: any, i: any) => {
     let deleted = list.splice(i, 1);
     let filtered = list.filter((list) => {
       return list !== deleted[0];
@@ -39,9 +38,9 @@ export default function Questions() {
   };
 
   const addQuestion = () => {
-    setModal(true)
-  }
- 
+    setModal(true);
+  };
+
   useEffect(() => {
     fetchdata();
   }, [modal]);
@@ -62,8 +61,7 @@ export default function Questions() {
         </div>
 
         <ul className="my-4 space-y-1 p-6   sortable-list text-xs ">
-          {
-          list.map((item, i) => (
+          {list.map((item, i) => (
             <div key={item.question}>
               <li className=" opacity-100  ">
                 <p className="flex p-4 text-base font-bold text-gray-800 rounded-lg overflow-hidden   group hover:shadow  dark:bg-gray-700 dark:hover:bg-zinc-300 dark:text-white dark:hover:text-black justify-between">
@@ -74,7 +72,12 @@ export default function Questions() {
                   <span
                     className="svg-icon svg-icon-primary svg-icon-2x "
                     title="Delete"
-                    onClick={() => deleteQ(item._id, i)}
+                    onClick={() => {
+                      var result = confirm("Want to delete?");
+                      if (result) {
+                        deleteQ(item._id, i);
+                      }
+                    }}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -112,11 +115,7 @@ export default function Questions() {
             </div>
           ))}
         </ul>
-        <div>
-
-       {modal && <AddQuestion modal={modal} setModal={setModal} />}
-        </div>
-        
+        <div>{modal && <AddQuestion modal={modal} setModal={setModal} />}</div>
 
         <button
           onClick={addQuestion}
