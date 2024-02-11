@@ -17,6 +17,10 @@ const questionSchema = new mongoose.Schema({
         },
       },
     ],
+    difficulty: {
+      type: String,
+      default: "Easy"
+    }
   });
 
   const Question = mongoose.models.questions || mongoose.model("questions", questionSchema);

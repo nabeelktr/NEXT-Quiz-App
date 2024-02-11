@@ -3,6 +3,8 @@
 import React, { Fragment, useRef, useState } from "react";
 import axios from "axios";
 import { Dialog, Transition } from "@headlessui/react";
+import { Option, Select } from "@material-tailwind/react";
+import { Toaster, toast } from "sonner";
 
 const AddQuestion = ({
   modal,
@@ -15,6 +17,7 @@ const AddQuestion = ({
   const [option, setOption] = useState(0);
   const cancelButtonRef = useRef(null);
 
+
   const [creds, setcreds] = useState({
     question: "",
     answerOptions: [
@@ -23,6 +26,7 @@ const AddQuestion = ({
       { answer: "", isCorrect: false },
       { answer: "", isCorrect: false },
     ],
+    difficulty : "Easy"
   });
 
   const addQ = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -35,11 +39,11 @@ const AddQuestion = ({
         !creds.answerOptions[2].answer.trim().length ||
         !creds.answerOptions[3].answer.trim().length
       ) {
-        alert("fill all fields");
+        toast.warning("fill all the fields");
       } else {
         const set = new Set(creds.answerOptions.map((option) => option.answer));
         if (set.size < 4) {
-          alert("avoid duplicate answers");
+          toast.warning("avoid duplicate answers");
         } else {
           creds.answerOptions[option].isCorrect = true;
           await axios.post("/api/question", creds);
@@ -53,6 +57,7 @@ const AddQuestion = ({
 
   return (
     <>
+ 
       <Transition.Root show={modal} as={Fragment}>
         <Dialog
           as="div"
@@ -204,6 +209,21 @@ const AddQuestion = ({
                                 />
                               </div>
                             </div>
+
+                            <div className="pb-4 w-1/2 pr-2">
+                            <label className="block mb-3 text-sm font-medium text-gray-900 dark:text-white">Difficulty?</label>
+                              <Select
+                                label="Select difficulty level.."
+                                placeholder={""}
+                                value={creds.difficulty}
+                                onChange={(value: any) => setcreds({...creds, difficulty:value})}
+                              >
+                                <Option value="Easy">Easy</Option>
+                                <Option value="Medium">Medium</Option>
+                                <Option value="Hard">Hard</Option>
+                              </Select>
+                            </div>
+
                             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                               Select Correct Option
                             </label>

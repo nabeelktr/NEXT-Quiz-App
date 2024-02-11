@@ -4,7 +4,20 @@ import { NextRequest, NextResponse } from "next/server";
 connect();
 
 export async function GET(request: Request) {
-  const questions = await Question.find();
+  const { searchParams } = new URL(request.url);
+  const total  = Number(searchParams.get('total'));
+  const difficulty = searchParams.get('difficulty') as string
+
+let questions;
+  if(total){
+     questions = await Question.aggregate([
+    { $sample: { size: total } }
+  ]);
+}else{
+   questions = await Question.find();
+
+}
+
   return NextResponse.json({
     questions,
   });

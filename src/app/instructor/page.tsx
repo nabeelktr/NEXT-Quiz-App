@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import Login from "../component/Login";
 export const metadata: Metadata = {
   title: {
-    absolute: "Instructor | Quiz App",
+    absolute: "Admin | Quiz App",
   },
 };
 

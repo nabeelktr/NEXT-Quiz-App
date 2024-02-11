@@ -4,6 +4,9 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import AddQuestion from "../component/AddQuestion";
+import { toast } from "sonner";
+
+
 
 export default function Questions() {
   const [list, setList] = useState([
@@ -25,7 +28,9 @@ export default function Questions() {
 
   const signout = async () => {
     await axios.get("/api/signout");
+    
     router.push("/instructor");
+    toast.success("Logout Success")
   };
 
   const deleteQ = async (id: any, i: any) => {
@@ -60,11 +65,11 @@ export default function Questions() {
           </button>
         </div>
 
-        <ul className="my-4 space-y-1 p-6   sortable-list text-xs ">
+        <ul className="my-4 space-y-1 p-4   sortable-list text-xs ">
           {list.map((item, i) => (
             <div key={item.question}>
               <li className=" opacity-100  ">
-                <p className="flex p-4 text-base font-bold text-gray-800 rounded-lg overflow-hidden   group hover:shadow  dark:bg-gray-700 dark:hover:bg-zinc-300 dark:text-white dark:hover:text-black justify-between">
+                <p className="flex p-2 text-base font-bold text-gray-800 rounded-lg overflow-hidden   group hover:shadow  dark:bg-gray-700 dark:hover:bg-zinc-300 dark:text-white dark:hover:text-black justify-between">
                   <span className="flex text-sm">
                     {i + 1}. <span className="ml-2 ">{item.question}</span>
                   </span>

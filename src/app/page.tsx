@@ -1,9 +1,12 @@
+
 import Link from "next/link";
 
+
 export default function Home() {
+
   return (
     <div className=" grid text-center p-10">
-      <Link href="/quiz">
+      <Link href={'/category'}>
         <div
           className="cursor-pointer group border border-transparent px-5 py-4 transition-colors "
           rel="noopener noreferrer"
@@ -13,7 +16,7 @@ export default function Home() {
           >
             Start Quiz{" "}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
+              &gt;
             </span>
           </h2>
           <p className={`animate-slidein700 opacity-0 m-0 max-w-[30ch] text-sm `}>

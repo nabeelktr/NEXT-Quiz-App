@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function Login() {
   const [formdata, setFormdata] = useState({
@@ -18,6 +19,7 @@ export default function Login() {
       const { data } = await axios.post("/api/login", formdata);
 
       if (data.success) {
+        toast.success("Login Success")
         router.push("/questions");
       } else {
         setInvalid(true);
